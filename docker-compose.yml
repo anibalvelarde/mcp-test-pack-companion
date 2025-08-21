@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  mcp-inspector:
+    image: mcpjam/mcp-inspector:latest
+    ports:
+      - "3001:3001"
+    restart: unless-stopped
+    container_name: mcp-inspector
+    networks:
+      - my_network
+
+  hb-int-hub:
+    image: highbyte:4.2.0
+    ports:
+      - "45245:45245"
+      - "1885:1885"
+      - "8885:8885"
+      - "45345:45345"
+    restart: unless-stopped
+    container_name: highbyte
+    networks:
+      - my_network
+    volumes:
+      - hb_vol2:/usr/local/highbyte/appData
+
+  any-llm:
+    image: mintplexlabs/anythingllm:latest
+    ports:
+      - "3002:3001" # Changed to 3002 to avoid conflict with MCP Inspector
+    restart: unless-stopped
+    container_name: any-llm
+    networks:
+      - my_network
+    cap_add:
+      - SYS_ADMIN
+    volumes:
+      - type: bind
+        source: $HOME/.anyllm
+        target: /app/server/storage
+      - type: bind
+        source: $HOME/.anyllm/.env
+        target: /app/server/.env
+    environment:
+      STORAGE_DIR: "/app/server/storage"
+
+volumes:
+  hb_vol2:
+
+networks:
+  my_network:
+    driver: bridge
