@@ -1,18 +1,23 @@
 version: '3.8'
 
 services:
-  mcp-inspector:
-    image: mcp-inspector-image
-    ports:
-      - "6274:6274" # Mapping the MCP Inspector client port
-      - "6277:6277" # Mapping the MCP Inspector server port
-    restart: unless-stopped
-    container_name: mcp-inspector
-    networks:
-      - my_network
-    environment:
-      CLIENT_PORT: 6274
-      SERVER_PORT: 6277
+  # mcp-inspector:
+  #   image: mcp-inspector-image
+  #   ports:
+  #     - "6274:6274" # Mapping the MCP Inspector client port
+  #     - "6277:6277" # Mapping the MCP Inspector server port
+  #   restart: unless-stopped
+  #   container_name: mcp-inspector
+  #   networks:
+  #     - my_network
+  #   environment:
+  #     CLIENT_PORT: 6274
+  #     SERVER_PORT: 6277
+  # 
+  # NOTE: The Docker image for MCP Inspector is not ready yet. 
+  # Users can run the MCP Inspector using an auxiliary script that requires:
+  # * Node.js 24.x or later
+  # * Command to execute: npx @modelcontextprotocol/inspector
 
   hb-int-hub:
     image: highbyte:4.2.0

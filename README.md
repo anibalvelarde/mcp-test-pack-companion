@@ -25,6 +25,12 @@ This repository contains a Docker Compose setup to deploy a set of services for 
 ## Prerequisites
 - Ensure Docker and Docker Compose are installed on your machine.
 - Create necessary directories for volume bindings if they do not exist before running the services.
+- MCP Inspector currently does not have a reliable Docker image. Use the auxiliary setup:
+  - Install Node.js version 24.x or later.
+  - Run the following command to start MCP Inspector:
+    ```bash
+    npx @modelcontextprotocol/inspector
+    ```
 
 ### Directory and File Setup for Anything LLM
 To avoid errors during the Docker Compose setup, ensure that the necessary directories and files for Anything LLM are prepared:
