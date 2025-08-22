@@ -2,13 +2,17 @@ version: '3.8'
 
 services:
   mcp-inspector:
-    image: mcpjam/mcp-inspector:latest
+    image: mcp-inspector-image
     ports:
-      - "3001:3001"
+      - "6274:6274" # Mapping the MCP Inspector client port
+      - "6277:6277" # Mapping the MCP Inspector server port
     restart: unless-stopped
     container_name: mcp-inspector
     networks:
       - my_network
+    environment:
+      CLIENT_PORT: 6274
+      SERVER_PORT: 6277
 
   hb-int-hub:
     image: highbyte:4.2.0
